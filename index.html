@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Raphaël · Easing Demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="index.css" type="text/css" media="screen">
+
+
+    <script type="text/javascript" charset="utf-8">
+
+        window.onload = function () {
+                var paper = new Raphael(0, 0, 500, 500);
+                var lines = paper.set();
+                lines.push(
+                    paper.path( "M50,5 L50,80"),
+                    paper.path( "M90,5 L90,80"),
+                    paper.path( "M130,5 L130,80"),
+                    paper.path( "M170,5 L170,80"),
+                    paper.path( "M210,5 L210,80"),
+                    paper.path( "M250,5 L250,80")
+                );
+
+                //creates circles and groups them together to make changes apply to all circles
+                var circles = paper.set();
+                circles.push(
+                    paper.circle(50, 100, 20),
+                    paper.circle(90, 100, 20),
+                    paper.circle(130, 100, 20),
+                    paper.circle(170, 100, 20),
+                    paper.circle(210, 100, 20),
+                    paper.circle(250, 100, 20)
+                );
+
+                //changes color of circle to a gradient fill, a special feature of this library
+                circles.attr({fill: "25-#00a9e0-#323490:0-#ea1688:20-#eb2e2e:40-#fde92d:60-#009e54"});
+
+                //creates animation to change color to mare sure .click function is registering then click again for animation
+                circles[0].click(function () {
+                    this.cy = this.cy || 100;
+                    this.animate({cy: this.cy, "stroke-width": this.cy / 100, fill: this.cy + 200 ? "hsb(0, .75, .75)" : "#000", "fill-opacity": +!!(this.cy + 100)}, 1000);
+                    this.cy = this.cy == 100 ? 300 : 100;
+                });
+                circles[1].click(function () {
+                   this.cy = this.cy || 100;
+                   this.animate({cy: this.cy, "stroke-width": this.cy / 100, fill: this.cy + 200 ? "hsb(.4, .75, .75)" : "#000", "fill-opacity": +!!(this.cy + 100)}, 1000, "bounce");
+                   this.cy = this.cy == 100 ? 300 : 100;
+                });
+                circles[2].click(function () {
+                    this.cy = this.cy || 100;
+                    this.animate({cy: this.cy, "stroke-width": this.cy / 100, fill: this.cy + 200 ? "hsb(.5, .75, .75)" : "#000", "fill-opacity": +!!(this.cy + 100)}, 1000, "elastic");
+                    this.cy = this.cy == 100 ? 300 : 100;
+                });
+                circles[3].click(function () {
+                    this.cy = this.cy || 100;
+                    this.animate({cy: this.cy, "stroke-width": this.cy / 100, fill: this.cy + 200 ? "hsb(.6, .75, .75)" : "#000", "fill-opacity": +!!(this.cy + 100)}, 1000, "backIn");
+                    this.cy = this.cy == 100 ? 300 : 100;   
+                });
+                circles[4].click(function () {
+                    this.cy = this.cy || 100;
+                    this.animate({cy: this.cy, "stroke-width": this.cy / 100, fill: this.cy + 200 ? "hsb(.7, .75, .75)" : "#000", "fill-opacity": +!!(this.cy + 100)}, 1000, "backOut");
+                    this.cy = this.cy == 100 ? 300 : 100;   
+                });
+                circles[5].click(function () {
+                    this.cy = this.cy || 100;
+                    this.animate({cy: this.cy, "stroke-width": this.cy / 100, fill: this.cy + 200 ? "hsb(.7, .75, .75)" : "#000", "fill-opacity": +!!(this.cy + 100)}, 1000, "<>");
+                    this.cy = this.cy == 100 ? 300 : 100;
+                });
+        }
+        </script>
+</head>
+
+<body>
+    <div id="holder"></div>
+
+
+</body>
+
+</html>
